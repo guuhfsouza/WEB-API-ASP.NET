@@ -1,0 +1,505 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GerenciamentoSalaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agenda">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+          </Key>
+          <Property Name="idAgenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPessoa" Type="int" Nullable="false" />
+          <Property Name="idFuncionario" Type="int" Nullable="false" />
+          <Property Name="idServico" Type="int" Nullable="false" />
+          <Property Name="dataAgendada" Type="datetime" Nullable="false" />
+          <Property Name="horaAgendada" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Caixa">
+          <Key>
+            <PropertyRef Name="idCaixa" />
+          </Key>
+          <Property Name="idCaixa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valorTotal" Type="float" Nullable="false" />
+          <Property Name="valorSaida" Type="float" Nullable="false" />
+          <Property Name="valorEntrada" Type="float" Nullable="false" />
+          <Property Name="dtFechamento" Type="date" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="Comissao">
+          <Key>
+            <PropertyRef Name="idComissao" />
+          </Key>
+          <Property Name="idComissao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFuncionario" Type="int" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigSis">
+          <Key>
+            <PropertyRef Name="idConfig" />
+          </Key>
+          <Property Name="idConfig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="valor" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Corte">
+          <Key>
+            <PropertyRef Name="idCorte" />
+          </Key>
+          <Property Name="idCorte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFuncionario" Type="int" Nullable="false" />
+          <Property Name="idServico" Type="int" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
+          <Property Name="dtInclusao" Type="date" />
+        </EntityType>
+        <EntityType Name="ItemVenda">
+          <Key>
+            <PropertyRef Name="idItemVenda" />
+          </Key>
+          <Property Name="idItemVenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idVenda" Type="int" Nullable="false" />
+          <Property Name="idProduto" Type="int" Nullable="false" />
+          <Property Name="valorProduto" Type="float" Nullable="false" />
+          <Property Name="valorDesconto" Type="float" Nullable="false" />
+          <Property Name="valorTotal" Type="float" Nullable="false" />
+          <Property Name="percDesconto" Type="float" Nullable="false" />
+          <Property Name="qntde" Type="float" Nullable="false" />
+          <Property Name="dtInclusao" Type="date" />
+        </EntityType>
+        <EntityType Name="Lancamentos">
+          <Key>
+            <PropertyRef Name="idLancamento" />
+          </Key>
+          <Property Name="idLancamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fornecedor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="10" />
+          <Property Name="dtInclusao" Type="date" />
+        </EntityType>
+        <EntityType Name="LogEventos">
+          <Key>
+            <PropertyRef Name="idLog" />
+          </Key>
+          <Property Name="idLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="evento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="valoranterior" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="valornovo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="usuariodealteracao" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dataalteracao" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificaPagamento">
+          <Key>
+            <PropertyRef Name="cdLiberacaoGet" />
+          </Key>
+          <Property Name="idNotificacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
+          <Property Name="competencia" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="cdLiberacaoGet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cdLiberacaoSet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="vencimento" Type="int" />
+          <Property Name="dialimite" Type="int" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="idPessoa" />
+          </Key>
+          <Property Name="idPessoa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nm_pessoa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="telefone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="funcionario" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="idProduto" />
+          </Key>
+          <Property Name="idProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nm_produto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="categoria" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="quantAntiga" Type="float" Nullable="false" />
+          <Property Name="quantAtual" Type="float" Nullable="false" />
+          <Property Name="valorAntigo" Type="float" Nullable="false" />
+          <Property Name="valorAtual" Type="float" Nullable="false" />
+          <Property Name="ativo" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="senha" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="admin" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venda">
+          <Key>
+            <PropertyRef Name="idVenda" />
+          </Key>
+          <Property Name="idVenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" />
+          <Property Name="valorTotal" Type="float" />
+          <Property Name="descontoTotal" Type="float" />
+          <Property Name="percDescTotal" Type="float" />
+          <Property Name="dtInclusao" Type="date" />
+          <Property Name="status" Type="varchar" MaxLength="7" />
+          <Property Name="tipoPagamento" Type="varchar" MaxLength="7" />
+        </EntityType>
+        <EntityContainer Name="GerenciamentoSalaoModelStoreContainer">
+          <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Caixa" EntityType="Self.Caixa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comissao" EntityType="Self.Comissao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConfigSis" EntityType="Self.ConfigSis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Corte" EntityType="Self.Corte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemVenda" EntityType="Self.ItemVenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lancamentos" EntityType="Self.Lancamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogEventos" EntityType="Self.LogEventos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificaPagamento" EntityType="Self.NotificaPagamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venda" EntityType="Self.Venda" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GerenciamentoSalaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agenda">
+          <Key>
+            <PropertyRef Name="idAgenda" />
+          </Key>
+          <Property Name="idAgenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPessoa" Type="Int32" Nullable="false" />
+          <Property Name="idFuncionario" Type="Int32" Nullable="false" />
+          <Property Name="idServico" Type="Int32" Nullable="false" />
+          <Property Name="dataAgendada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="horaAgendada" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Caixa">
+          <Key>
+            <PropertyRef Name="idCaixa" />
+          </Key>
+          <Property Name="idCaixa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valorTotal" Type="Double" Nullable="false" />
+          <Property Name="valorSaida" Type="Double" Nullable="false" />
+          <Property Name="valorEntrada" Type="Double" Nullable="false" />
+          <Property Name="dtFechamento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Comissao">
+          <Key>
+            <PropertyRef Name="idComissao" />
+          </Key>
+          <Property Name="idComissao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFuncionario" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfigSis">
+          <Key>
+            <PropertyRef Name="idConfig" />
+          </Key>
+          <Property Name="idConfig" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Corte">
+          <Key>
+            <PropertyRef Name="idCorte" />
+          </Key>
+          <Property Name="idCorte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFuncionario" Type="Int32" Nullable="false" />
+          <Property Name="idServico" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Double" Nullable="false" />
+          <Property Name="dtInclusao" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ItemVenda">
+          <Key>
+            <PropertyRef Name="idItemVenda" />
+          </Key>
+          <Property Name="idItemVenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVenda" Type="Int32" Nullable="false" />
+          <Property Name="idProduto" Type="Int32" Nullable="false" />
+          <Property Name="valorProduto" Type="Double" Nullable="false" />
+          <Property Name="valorDesconto" Type="Double" Nullable="false" />
+          <Property Name="valorTotal" Type="Double" Nullable="false" />
+          <Property Name="percDesconto" Type="Double" Nullable="false" />
+          <Property Name="qntde" Type="Double" Nullable="false" />
+          <Property Name="dtInclusao" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Lancamentos">
+          <Key>
+            <PropertyRef Name="idLancamento" />
+          </Key>
+          <Property Name="idLancamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fornecedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valor" Type="Double" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="dtInclusao" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="LogEventos">
+          <Key>
+            <PropertyRef Name="idLog" />
+          </Key>
+          <Property Name="idLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="evento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valoranterior" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valornovo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuariodealteracao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dataalteracao" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="NotificaPagamento">
+          <Key>
+            <PropertyRef Name="cdLiberacaoGet" />
+          </Key>
+          <Property Name="idNotificacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valor" Type="Double" Nullable="false" />
+          <Property Name="competencia" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cdLiberacaoGet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cdLiberacaoSet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vencimento" Type="Int32" />
+          <Property Name="dialimite" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="idPessoa" />
+          </Key>
+          <Property Name="idPessoa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nm_pessoa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="funcionario" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="idProduto" />
+          </Key>
+          <Property Name="idProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nm_produto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categoria" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="quantAntiga" Type="Double" Nullable="false" />
+          <Property Name="quantAtual" Type="Double" Nullable="false" />
+          <Property Name="valorAntigo" Type="Double" Nullable="false" />
+          <Property Name="valorAtual" Type="Double" Nullable="false" />
+          <Property Name="ativo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="admin" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venda">
+          <Key>
+            <PropertyRef Name="idVenda" />
+          </Key>
+          <Property Name="idVenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" />
+          <Property Name="valorTotal" Type="Double" />
+          <Property Name="descontoTotal" Type="Double" />
+          <Property Name="percDescTotal" Type="Double" />
+          <Property Name="dtInclusao" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="tipoPagamento" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="GerenciamentoSalaoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agenda" EntityType="Self.Agenda" />
+          <EntitySet Name="Caixa" EntityType="Self.Caixa" />
+          <EntitySet Name="Comissao" EntityType="Self.Comissao" />
+          <EntitySet Name="ConfigSis" EntityType="Self.ConfigSis" />
+          <EntitySet Name="Corte" EntityType="Self.Corte" />
+          <EntitySet Name="ItemVenda" EntityType="Self.ItemVenda" />
+          <EntitySet Name="Lancamentos" EntityType="Self.Lancamentos" />
+          <EntitySet Name="LogEventos" EntityType="Self.LogEventos" />
+          <EntitySet Name="NotificaPagamento" EntityType="Self.NotificaPagamento" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Venda" EntityType="Self.Venda" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GerenciamentoSalaoModelStoreContainer" CdmEntityContainer="GerenciamentoSalaoEntities">
+          <EntitySetMapping Name="Agenda">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Agenda">
+              <MappingFragment StoreEntitySet="Agenda">
+                <ScalarProperty Name="idAgenda" ColumnName="idAgenda" />
+                <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
+                <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+                <ScalarProperty Name="idServico" ColumnName="idServico" />
+                <ScalarProperty Name="dataAgendada" ColumnName="dataAgendada" />
+                <ScalarProperty Name="horaAgendada" ColumnName="horaAgendada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Caixa">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Caixa">
+              <MappingFragment StoreEntitySet="Caixa">
+                <ScalarProperty Name="idCaixa" ColumnName="idCaixa" />
+                <ScalarProperty Name="valorTotal" ColumnName="valorTotal" />
+                <ScalarProperty Name="valorSaida" ColumnName="valorSaida" />
+                <ScalarProperty Name="valorEntrada" ColumnName="valorEntrada" />
+                <ScalarProperty Name="dtFechamento" ColumnName="dtFechamento" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comissao">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Comissao">
+              <MappingFragment StoreEntitySet="Comissao">
+                <ScalarProperty Name="idComissao" ColumnName="idComissao" />
+                <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfigSis">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.ConfigSis">
+              <MappingFragment StoreEntitySet="ConfigSis">
+                <ScalarProperty Name="idConfig" ColumnName="idConfig" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Corte">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Corte">
+              <MappingFragment StoreEntitySet="Corte">
+                <ScalarProperty Name="idCorte" ColumnName="idCorte" />
+                <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+                <ScalarProperty Name="idServico" ColumnName="idServico" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="dtInclusao" ColumnName="dtInclusao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemVenda">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.ItemVenda">
+              <MappingFragment StoreEntitySet="ItemVenda">
+                <ScalarProperty Name="idItemVenda" ColumnName="idItemVenda" />
+                <ScalarProperty Name="idVenda" ColumnName="idVenda" />
+                <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+                <ScalarProperty Name="valorProduto" ColumnName="valorProduto" />
+                <ScalarProperty Name="valorDesconto" ColumnName="valorDesconto" />
+                <ScalarProperty Name="valorTotal" ColumnName="valorTotal" />
+                <ScalarProperty Name="percDesconto" ColumnName="percDesconto" />
+                <ScalarProperty Name="qntde" ColumnName="qntde" />
+                <ScalarProperty Name="dtInclusao" ColumnName="dtInclusao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lancamentos">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Lancamentos">
+              <MappingFragment StoreEntitySet="Lancamentos">
+                <ScalarProperty Name="idLancamento" ColumnName="idLancamento" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="dtInclusao" ColumnName="dtInclusao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogEventos">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.LogEventos">
+              <MappingFragment StoreEntitySet="LogEventos">
+                <ScalarProperty Name="idLog" ColumnName="idLog" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="valoranterior" ColumnName="valoranterior" />
+                <ScalarProperty Name="valornovo" ColumnName="valornovo" />
+                <ScalarProperty Name="usuariodealteracao" ColumnName="usuariodealteracao" />
+                <ScalarProperty Name="dataalteracao" ColumnName="dataalteracao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificaPagamento">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.NotificaPagamento">
+              <MappingFragment StoreEntitySet="NotificaPagamento">
+                <ScalarProperty Name="idNotificacao" ColumnName="idNotificacao" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="competencia" ColumnName="competencia" />
+                <ScalarProperty Name="cdLiberacaoGet" ColumnName="cdLiberacaoGet" />
+                <ScalarProperty Name="cdLiberacaoSet" ColumnName="cdLiberacaoSet" />
+                <ScalarProperty Name="vencimento" ColumnName="vencimento" />
+                <ScalarProperty Name="dialimite" ColumnName="dialimite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pessoa">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Pessoa">
+              <MappingFragment StoreEntitySet="Pessoa">
+                <ScalarProperty Name="idPessoa" ColumnName="idPessoa" />
+                <ScalarProperty Name="nm_pessoa" ColumnName="nm_pessoa" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="funcionario" ColumnName="funcionario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+                <ScalarProperty Name="nm_produto" ColumnName="nm_produto" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="quantAntiga" ColumnName="quantAntiga" />
+                <ScalarProperty Name="quantAtual" ColumnName="quantAtual" />
+                <ScalarProperty Name="valorAntigo" ColumnName="valorAntigo" />
+                <ScalarProperty Name="valorAtual" ColumnName="valorAtual" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="usuario1" ColumnName="usuario" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venda">
+            <EntityTypeMapping TypeName="GerenciamentoSalaoModel.Venda">
+              <MappingFragment StoreEntitySet="Venda">
+                <ScalarProperty Name="idVenda" ColumnName="idVenda" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="valorTotal" ColumnName="valorTotal" />
+                <ScalarProperty Name="descontoTotal" ColumnName="descontoTotal" />
+                <ScalarProperty Name="percDescTotal" ColumnName="percDescTotal" />
+                <ScalarProperty Name="dtInclusao" ColumnName="dtInclusao" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="tipoPagamento" ColumnName="tipoPagamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
